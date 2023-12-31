@@ -1,0 +1,6 @@
+enum BookingStatus{
+    CONFIRMING = "CONFIRMING",
+    CONFIRMED = "CONFIRMED",
+    WAITING = "WAITING",
+    CANCELLED = "CANCELLED"
+}

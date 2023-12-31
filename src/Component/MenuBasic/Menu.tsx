@@ -9,7 +9,7 @@ type MenuSupport = {
 };
 
 type PropsMenu = {
-  menuSupportList: MenuSupport[];
+  menuList: MenuSupport[];
 } & Omit<MenuProps, "open">;
 
 export default function MyBasicMenu(props: PropsMenu) {
@@ -22,7 +22,7 @@ export default function MyBasicMenu(props: PropsMenu) {
     setAnchorEl(null);
   };
 
-  const { menuSupportList, children } = props;
+  const { menuList, children } = props;
   return (
     <>
       <MyButton
@@ -59,7 +59,7 @@ export default function MyBasicMenu(props: PropsMenu) {
           "aria-labelledby": "basic-button",
         }}
       >
-        {menuSupportList.map((menu) => {
+        {menuList.map((menu) => {
           return (
             <Box
               sx={{
