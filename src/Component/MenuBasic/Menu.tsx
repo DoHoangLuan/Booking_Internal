@@ -1,11 +1,13 @@
 import * as React from "react";
 import { Box, Menu, MenuItem, MenuProps } from "@mui/material";
 import MyButton from "../MyButtons/MyButtons";
+import { NavLink,Link } from "react-router-dom";
 
 type MenuSupport = {
   title: string;
   icon: React.ReactNode;
   className: string;
+  to:string;
 };
 
 type PropsMenu = {
@@ -30,12 +32,12 @@ export default function MyBasicMenu(props: PropsMenu) {
           color: "black",
           "&:hover": { background: "none" },
           display: "flex",
-          flexDirection:"row",
+          flexDirection: "row",
           gap: "10px",
           fontSize: "13px",
-          alignItems:"center",
-          lineHeight:"29.5px",
-          justifyContent:"center"
+          alignItems: "center",
+          lineHeight: "29.5px",
+          justifyContent: "center",
         }}
         id="basic-button"
         onClick={handleClick}
@@ -61,23 +63,25 @@ export default function MyBasicMenu(props: PropsMenu) {
       >
         {menuList.map((menu) => {
           return (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
-                padding: "0 16px",
-                "&:hover": { backgroundColor: "#e5e5e5" },
-              }}
-            >
-              <div className={menu.className}>{menu.icon}</div>
-              <MenuItem
-                sx={{ color: "black", "&:hover": { background: "none" } }}
-                onClick={handleClose}
+            <Link to={menu.to}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "start",
+                  alignItems: "center",
+                  padding: "0 16px",
+                  "&:hover": { backgroundColor: "#e5e5e5" },
+                }}
               >
-                {menu.title}
-              </MenuItem>
-            </Box>
+                <div className={menu.className}>{menu.icon}</div>
+                <MenuItem
+                  sx={{ color: "black", "&:hover": { background: "none" } }}
+                  onClick={handleClose}
+                >
+                  {menu.title}
+                </MenuItem>
+              </Box>
+            </Link>
           );
         })}
       </Menu>

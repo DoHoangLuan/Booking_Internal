@@ -2,16 +2,19 @@ import MyBasicMenu from "../../Component/MenuBasic/Menu";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import { SiTeamviewer } from "react-icons/si";
 import { IoHelpCircleOutline, IoSettingsOutline } from "react-icons/io5";
-import { IoIosDesktop,IoIosLogOut  } from "react-icons/io";
+import { IoIosDesktop, IoIosLogOut } from "react-icons/io";
 import { LuMousePointerClick } from "react-icons/lu";
-import { FaRegUserCircle,FaStore  } from "react-icons/fa";
+import { FaRegUserCircle, FaStore } from "react-icons/fa";
 import { FaClockRotateLeft } from "react-icons/fa6";
-import { MdAccountBox,MdFastfood,MdAutoDelete   } from "react-icons/md";
+import { MdAccountBox, MdFastfood, MdAutoDelete } from "react-icons/md";
+import { GrUserNew } from "react-icons/gr";
 import MyTabs from "../../Component/MyTabs/MyTabs";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import Booking from "../../pages/Booking/Booking";
 import Pending from "../../pages/Pending/Pending";
 import Success from "../../pages/Success/Success";
+import { useSelector } from "react-redux";
+import { RootState } from "../../types/AuthStaff";
 
 const menuSupport = [
   {
@@ -69,10 +72,17 @@ const accountStaff = [
     className: "text-[#76a6f2] text-[22px]",
   },
   {
+    icon: <GrUserNew/>,
+    title: "Tạo tài khoản",
+    className: "text-[#76a6f2] text-[22px]",
+    to: "/register"
+  },
+  {
     icon: <IoIosLogOut />,
     title: "Đăng xuất",
     className: "text-[#76a6f2] text-[22px]",
   },
+  
 ];
 const MenuTabs = [
   {
@@ -92,7 +102,10 @@ const MenuTabs = [
     children: <Success />,
   },
 ];
+
+
 const Header = () => {
+  const staff = useSelector((state : RootState) => state.authStaff.login.currentStaff)
   return (
     <div>
       <div className="h-[50px] ">
@@ -110,19 +123,19 @@ const Header = () => {
               <p> Vay vốn</p>
             </div>
             <div>
-              <MyBasicMenu menuList={menuSupport} >
+              <MyBasicMenu menuList={menuSupport}>
                 <p>Hỗ trợ</p>
               </MyBasicMenu>
             </div>
             <div>
-              <MyBasicMenu menuList={menuSettings} >
+              <MyBasicMenu menuList={menuSettings}>
                 <p>Thiết lập</p>
                 <IoSettingsOutline />
               </MyBasicMenu>
             </div>
             <div>
               <MyBasicMenu menuList={accountStaff}>
-                <p>admin</p>
+                <p>{staff.staffname}</p>
                 <FaRegUserCircle />
               </MyBasicMenu>
             </div>
@@ -130,8 +143,7 @@ const Header = () => {
         </div>
       </div>
       <div>
-        <MyTabs menuTab={MenuTabs}>
-        </MyTabs>
+        <MyTabs menuTab={MenuTabs}></MyTabs>
       </div>
     </div>
   );

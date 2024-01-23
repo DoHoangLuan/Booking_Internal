@@ -8,3 +8,5 @@ type CustomerTable = {
     confirmation: React.ReactNode;
     cancel: React.ReactNode;
   };
+
+
